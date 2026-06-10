@@ -1,0 +1,27 @@
+services:
+  - type: web
+    name: sports-league-management
+    env: docker
+    dockerfilePath: Dockerfile
+    repo: yourusername/sports-league-management   # Change to your repo
+    branch: main
+    rootDir: /
+    plan: free
+    
+    envVars:
+      - key: SECRET_KEY
+        generateValue: true
+      - key: POSTGRES_USER
+        value: sports_league_owner
+      - key: POSTGRES_PASSWORD
+        sync: false
+      - key: POSTGRES_DB
+        value: sports_league
+      - key: FOOTBALL_DATA_API_KEY
+        sync: false
+
+  - type: pgsql
+    name: sports-league-db
+    databaseName: sports_league
+    user: sports_league_owner
+    plan: free
